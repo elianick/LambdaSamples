@@ -8,26 +8,31 @@ package part1.lambdas.exercises;
 
 /**
  * Transform code to use lambda expressions
- * 
- * @author aohz
  *
+ * @author aohz
  */
 public class Exercise1 {
 
-	public static void main(String[] args) {
-		System.out.println("Main Start...");
+    public static void main(String[] args) {
+        System.out.println("Main Start...");
 
-		Runnable task = new Runnable() {
-			@Override
-			public void run() {
-				System.out.println("processing in thread");
-			}
-		};
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("processing in thread");
+            }
+        };
+        Runnable task1 = () -> System.out.println("processing in thread");
 
-		Thread myThread = new Thread(task);
-		myThread.start();
-		
-		System.out.println("...End Main");
-	}
+
+        Thread myThread = new Thread(task1);
+        //alternative
+        Thread myThread1 = new Thread( () -> System.out.println("processing in thread") ) ;
+
+        myThread.start();
+        myThread1.start();
+
+        System.out.println("...End Main");
+    }
 
 }

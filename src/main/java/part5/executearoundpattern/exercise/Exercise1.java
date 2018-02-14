@@ -3,6 +3,7 @@ package part5.executearoundpattern.exercise;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * 
@@ -18,8 +19,12 @@ import java.util.List;
  */
 public class Exercise1 {
 
-	public static List filter(List list, Object lambda) {
+	public static List filter(List list, Predicate predicate) {
 		List results = new ArrayList<>();
+		list.forEach(s -> {
+			if (predicate.test(s))
+				results.add(s);
+		});
 		return results;
 	}
 
@@ -33,17 +38,22 @@ public class Exercise1 {
 
 	public static void printNoEmptyString(List<String> listOfStrings) {
 		System.out.println("==========No empty========");
-		filter(listOfStrings, null);
+		Predicate<String> predicate = s -> !s.isEmpty();
+		filter(listOfStrings,  predicate).forEach(System.out::println);
 	}
 
 	public static void printShorterThan3(List<String> listOfStrings) {
 		System.out.println("==========Sort String========");
-		filter(listOfStrings, null);
+		Predicate<String> predicate = s -> s.length() <= 3;
+		filter(listOfStrings, predicate).forEach(System.out::println);;
 	}
 
 	public static void printStringsAppliyingBothFilers(List<String> listOfStrings) {
 		System.out.println("==========Both========");
-		filter(listOfStrings, null);
+		Predicate<String> predicate = s -> !s.isEmpty();
+		Predicate<String> predicate2 = s -> s.length() <= 3;
+
+		filter(listOfStrings, 	predicate.and(predicate2)).forEach(System.out::println);;
 	}
 
 }

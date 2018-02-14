@@ -29,14 +29,14 @@ public class SummaryExercise1 implements Exercise {
 
 	private static File[] getChildDirsWithLambda(String dir) {
 		File f = new File(dir);
-		//f.listFiles();
-		return null;
+		File[] list = f.listFiles(s -> s.isDirectory());
+		return list;
 	}
 
-	private static File[] getChildDirsWithMethodReference(String dir) {	
+	private static File[] getChildDirsWithMethodReference(String dir) {
 		File f = new File(dir);
-		//f.listFiles(nul);
-		return null;
+		File[] list = f.listFiles(File::isDirectory);
+		return list;
 	}
 
 }

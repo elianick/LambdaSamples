@@ -17,8 +17,8 @@ public interface Exercise {
     default List<String> getWordsAsList() {
         String content;
         try {
-            content = new String(Files.readAllBytes(Paths.get(this.getClass().getResource("/alice.txt").toURI())), StandardCharsets.UTF_8);
-            return Arrays.asList(content.split("[\\P{L}]+"));
+            content = "hola que tal como estas";
+            return Arrays.asList(content.split(" "));
         } catch (Exception e) {
             System.out.println(e.toString());
             throw new RuntimeException(e);

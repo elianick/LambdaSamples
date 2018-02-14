@@ -1,6 +1,7 @@
 package part2.collections.exercises;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -27,28 +28,20 @@ public class Exercise1 {
 		people.add(new Person("Angel", 33));
 		people.add(new Person("Liusbetty", 19));
 
-		
-		Predicate<Person> filterAge = new Predicate<Person>() {
+		people.forEach(a -> System.out.println(a));
+		Comparator<Person> comparator = Comparator.comparing(Person::getName);
+		people.sort(comparator);
+		people.forEach(a -> System.out.println(a));
 
-			@Override
-			public boolean test(Person person) {
-				return person.getAge() < 30;
-			}
-		};
+		Predicate<Person> filterAge = person -> person.getAge() < 30;
 
 		System.out.println("----- Apply filterAge -----");
 		filter(people, filterAge);
 
-		Predicate<Person> filterSize = new Predicate<Person>() {
-
-			@Override
-			public boolean test(Person person) {
-				return person.getName().length() < 7;
-			}
-		};
+		Predicate<Person> filterSize = person -> person.getName().length() < 7;
 
 		System.out.println("----- Apply Both filterAge -----");
-		filter(people, filterAge, filterSize);
+		filter(people, filterAge.and(filterSize));
 	}
 	
 	
@@ -58,13 +51,10 @@ public class Exercise1 {
 				System.out.println(p);
 			}
 		}
-	}
-	
-	private static void filter(List<Person> people, Predicate<Person> filter1, Predicate<Person> filter2) {
-		for (Person p : people) {
-			if (filter1.test(p) && filter2.test(p)) {
-				System.out.println(p);
-			}
-		}
+		people.forEach(person -> {
+		    if (filter1.test(person)){
+                System.out.println(person);
+            }
+        });
 	}
 }

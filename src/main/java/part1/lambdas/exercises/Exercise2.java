@@ -35,19 +35,18 @@ public class Exercise2 {
 
 	private static void sortCaseSensitive(List<String> words) {
 		// CASE SENSITIVE		
-		
-		Collections.sort(words, null);		
+		Comparator<String> comparator = (a,b) -> {return a.compareTo(b);};
+		Collections.sort(words, comparator);
 	}
 
 	private static void sortCaseInsensitive(List<String> words) {
 		// CASE INSENSITIVE
-
-		Collections.sort(words, null);		
+		Comparator<String> comparator = (a,b) -> {return a.compareToIgnoreCase(b);};
+		Collections.sort(words, comparator);
 	}
 
 	private static <Z extends Object> void printCollection(Collection<Z> collection) {
-		for (Z string : collection) {
-			System.out.println(string);
-		}
+		collection.forEach(a -> System.out.println(a));
+		//for (Z string : collection) {			System.out.println(string);		}
 	}
 }

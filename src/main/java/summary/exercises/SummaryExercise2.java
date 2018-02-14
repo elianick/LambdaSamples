@@ -1,6 +1,7 @@
 package summary.exercises;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -18,13 +19,13 @@ public class SummaryExercise2 implements Exercise {
 	@Test
 	@Override
 	public void perform() {
-		String[] files = list(".", "md");
+		String[] files = list(".", "xml");
 		Arrays.asList(files).forEach(System.out::println);
 	}
 
 	private static String[] list(String inputDir, String ext) {
 		File dirFile = new File(inputDir);
-		dirFile.list(null);
-		return null;
+		return dirFile.list((dir,name) -> name.endsWith(ext));
+
 	}
 }
